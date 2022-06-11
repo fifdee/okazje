@@ -28,6 +28,6 @@ class Item(models.Model):
                 import requests
                 res = requests.get(self.image_url, stream=True)
                 if res.status_code == 200:
-                    self.image = ContentFile(res.text, name='image')
+                    self.image = ContentFile(res.content, name='image')
 
         return super().save(*args, **kwargs)

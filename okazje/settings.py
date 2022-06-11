@@ -235,4 +235,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 AZURE_ACCOUNT_NAME = 'okazje'
 AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY', default='')
 AZURE_CONTAINER = 'kontener'
-AZURE_URL_EXPIRATION_SECS = '3600'
+AZURE_URL_EXPIRATION_SECS = 3600
