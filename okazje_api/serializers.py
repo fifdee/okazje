@@ -7,7 +7,7 @@ from okazje_app.models import Item
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ['title', 'url', 'image', 'price', 'rating', 'rating_count']
+        fields = ['title', 'url', 'image', 'image_url', 'price', 'rating', 'rating_count']
 
     def validate_url(self, data):
         items = Item.objects.all()
