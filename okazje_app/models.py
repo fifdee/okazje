@@ -6,7 +6,7 @@ from okazje_app.utils import unique_slugify
 class Item(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField()
-    price = models.CharField(max_length=100, validators=[validate_comma_separated_integer_list])
+    price = models.CharField(max_length=100)
     url = models.URLField()
     description = models.TextField(null=True, blank=True)
     rating = models.CharField(max_length=100, validators=[validate_comma_separated_integer_list])
