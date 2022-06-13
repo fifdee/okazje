@@ -236,3 +236,26 @@ AZURE_ACCOUNT_NAME = 'okazje'
 AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY', default='')
 AZURE_CONTAINER = 'kontener'
 AZURE_URL_EXPIRATION_SECS = 3600
+
+THUMBNAILS = {
+    'METADATA': {
+        'BACKEND': 'thumbnails.backends.metadata.DatabaseBackend',
+    },
+    'STORAGE': {
+        'BACKEND': DEFAULT_FILE_STORAGE,
+    },
+    'SIZES': {
+        'medium': {
+            'PROCESSORS': [
+                {'PATH': 'thumbnails.processors.resize', 'width': 256, 'height': 256, 'method': 'fit'},
+            ],
+            'POST_PROCESSORS': [
+                {
+                    'PATH': 'thumbnails.post_processors.optimize',
+                    'png_command': 'optipng -force -o7 "%(filename)s"',
+                    'jpg_command': 'jpegoptim -f --strip-all "%(filename)s"',
+                },
+            ],
+        },
+    }
+}

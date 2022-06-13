@@ -1,16 +1,17 @@
 from django.core.files.base import ContentFile
 from django.db import models
 from okazje_app.utils import unique_slugify
+from thumbnails.fields import ImageField
 
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(null=True, blank=True)
+    image = ImageField(null=True, blank=True, pregenerated_sizes=["medium"])
     image_url = models.URLField(null=True, blank=True)
     price = models.CharField(max_length=100)
     url = models.URLField()
     description = models.TextField(null=True, blank=True)
-    rating = models.CharField(max_length=100)
+    rating = models.CharField(max_length=100, null=True, blank=True)
     rating_count = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=False, unique=True)
 
