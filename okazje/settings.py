@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_api_key',
     'request',
+    'thumbnails',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -249,13 +250,13 @@ THUMBNAILS = {
             'PROCESSORS': [
                 {'PATH': 'thumbnails.processors.resize', 'width': 256, 'height': 256, 'method': 'fit'},
             ],
-            'POST_PROCESSORS': [
-                {
-                    'PATH': 'thumbnails.post_processors.optimize',
-                    'png_command': 'optipng -force -o7 "%(filename)s"',
-                    'jpg_command': 'jpegoptim -f --strip-all "%(filename)s"',
-                },
-            ],
+            # 'POST_PROCESSORS': [
+            #     {
+            #         'PATH': 'thumbnails.post_processors.optimize',
+            #         'png_command': 'optipng -force -o7 "%(filename)s"',
+            #         'jpg_command': 'jpegoptim -f --strip-all "%(filename)s"',
+            #     },
+            # ],
         },
     }
 }
