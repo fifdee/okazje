@@ -4,14 +4,14 @@ from okazje_app.utils import unique_slugify, create_thumbnail
 
 
 class Item(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=256)
     image = models.ImageField(null=True, blank=True)
     image_thumbnail = models.ImageField(null=True, blank=True)
     image_url = models.URLField(null=True, blank=True)
     price = models.CharField(max_length=100)
     url = models.URLField()
     description = models.TextField(null=True, blank=True)
-    rating = models.CharField(max_length=100, null=True, blank=True)
+    rating = models.CharField(max_length=256, null=True, blank=True)
     rating_count = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=False, unique=True)
 
