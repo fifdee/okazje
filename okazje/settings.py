@@ -249,6 +249,7 @@ THUMBNAILS = {
         'medium': {
             'PROCESSORS': [
                 {'PATH': 'thumbnails.processors.resize', 'width': 256, 'height': 256, 'method': 'fit'},
+                {'PATH': 'thumbnails.processors.crop', 'width': 256, 'height': 256},
             ],
             # 'POST_PROCESSORS': [
             #     {
