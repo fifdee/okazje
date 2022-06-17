@@ -101,16 +101,10 @@ def create_thumbnail(input_image):
 
     if img_input_width > img_input_height:
         resized = img_input.resize((256, int(256 / img_input_ar)), Image.ANTIALIAS)
-        try:
-            img_white.paste(resized, (0, int((256 - int(256 / img_input_ar)) * 0.5)))
-        except TypeError:
-            img_white = resized
+        img_white.paste(resized, (0, int((256 - int(256 / img_input_ar)) * 0.5)))
     else:
         resized = img_input.resize((int(256 * img_input_ar), 256), Image.ANTIALIAS)
-        try:
-            img_white.paste(resized, int((256 - int(256 * img_input_ar)) * 0.5), 0)
-        except TypeError:
-            img_white = resized
+        img_white.paste(resized, (int((256 - int(256 * img_input_ar)) * 0.5), 0))
 
     from io import BytesIO
     output = BytesIO()
