@@ -87,6 +87,34 @@ def _slug_strip(value, separator='-'):
     return value
 
 
+def create_thumbnail(input_image):
+    from PIL import Image
+    img_width = 256
+    img_height = 256
+
+    img_white = Image.new('RGB', (img_width, img_height), color=(255, 255, 255))
+
+    img_input = Image.open(input_image)
+    img_input_width = img_input.size[0]
+    img_input_height = img_input.size[1]
+    img_input_ar = img_input_width / img_input_height
+
+    if img_input_width > img_input_height:
+        resized = img_input.resize((256, int(256 / img_input_ar)), Image.ANTIALIAS)
+        img_white.paste(resized, (0, int((256 - int(256 / img_input_ar)) * 0.5)))
+    else:
+        resized = img_input.resize((int(256 * img_input_ar), 256), Image.ANTIALIAS)
+        img_white.paste(resized, int((256 - int(256 * img_input_ar)) * 0.5), 0)
+
+    from io import BytesIO
+    output = BytesIO()
+    img_white.save(output, 'webp')
+    contents = output.getvalue()
+    output.close()
+
+    return contents
+
+
 def create_image(text):
     from PIL import Image, ImageDraw, ImageFont
     from string import ascii_letters
@@ -113,8 +141,9 @@ def create_image(text):
 
         body = text
         body = '\n'.join(
-            ['\n'.join(textwrap.wrap(line, img_width / avg_char_width, break_long_words=False, replace_whitespace=False))
-             for line in body.splitlines() if line.strip() != ''])
+            ['\n'.join(
+                textwrap.wrap(line, img_width / avg_char_width, break_long_words=False, replace_whitespace=False))
+                for line in body.splitlines() if line.strip() != ''])
 
         lines_number = body.count('\n') + 1
         text_height = lines_number * (font_height * 1.5)

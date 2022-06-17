@@ -1,12 +1,12 @@
 from django.core.files.base import ContentFile
 from django.db import models
-from okazje_app.utils import unique_slugify
-from thumbnails.fields import ImageField
+from okazje_app.utils import unique_slugify, create_thumbnail
 
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    image = ImageField(null=True, blank=True, pregenerated_sizes=["medium"])
+    image = models.ImageField(null=True, blank=True)
+    image_thumbnail = models.ImageField(null=True, blank=True)
     image_url = models.URLField(null=True, blank=True)
     price = models.CharField(max_length=100)
     url = models.URLField()
@@ -30,5 +30,10 @@ class Item(models.Model):
                 res = requests.get(self.image_url, stream=True)
                 if res.status_code == 200:
                     self.image = ContentFile(res.content, name='image')
+                    self.image_thumbnail = ContentFile(create_thumbnail(self.image), name='thumbnail')
+
+        if self.image:
+            if not self.image_thumbnail:
+                self.image_thumbnail = ContentFile(create_thumbnail(self.image), name='thumbnail')
 
         return super().save(*args, **kwargs)

@@ -13,7 +13,6 @@ Django==4.0.3
 django-allauth==0.49.0
 django-request==1.6.1
 django-storages==1.12.3
-django-thumbnails==0.7.0
 django-widget-tweaks==1.4.12
 djangorestframework==3.13.1
 djangorestframework-api-key==2.2.0
