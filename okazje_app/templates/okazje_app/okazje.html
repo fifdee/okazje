@@ -4,29 +4,39 @@
 {% block title %}Pokochasz.to - strona główna{% endblock %}
 
 {% block content %}
-    <header class="bg-dark py-2">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Okazje z Allegro</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Nie przegap najciekawszych ofert!</p>
+    <header class="py-0">
+{#        <div#}
+{#            class="p-0 text-center bg-image"#}
+{#            style="#}
+{#              background-image: url({% static 'assets/bg.svg' %});#}
+{#              height: 200px;#}
+{#            "#}
+{#          >#}
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white">
+                  <h1 class="mb-1">Nie przegap okazji :-)</h1>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
     </header>
 
     {% include 'okazje_app/modal.html' %}
 
     <section class="py-2">
         <div class="container px-1 px-lg-5 mt-1">
-            <div class="row gx-2 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="row gx-1 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {% for okazja in okazje %}
-
                     <div class="col mb-5">
-                        <div class="card h-100">
+                        <div class="card h-100 border-light">
                             <!-- Product image-->
                             <a href="" data-bs-toggle="modal" data-bs-target="#Modal"
                                onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">
                                 {#                            <a href="/{{ okazja.slug }}/image">#}
-                                <img class="card-img-top" src="/{{ okazja.slug }}/thumbnail" alt="..."/>
+                                <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
+                                     id="{{ okazja.id }}_image" alt="">
+{#                                <img class="" src="{% static 'assets/loading.svg' %}" alt="" id="{{ okazja.id }}_imageLoading"/>#}
                             </a>
 
                             <!-- Product details-->
@@ -48,14 +58,14 @@
                                     {{ okazja.price }}
                                 </div>
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="#"
-                                       data-bs-toggle="modal" data-bs-target="#Modal"
-                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>
-                                </div>
-                            </div>
+{#                            <!-- Product actions-->#}
+{#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
+{#                                <div class="text-center">#}
+{#                                    <a class="btn btn-outline-dark mt-auto" href="#"#}
+{#                                       data-bs-toggle="modal" data-bs-target="#Modal"#}
+{#                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>#}
+{#                                </div>#}
+{#                            </div>#}
                         </div>
                     </div>
                 {% endfor %}

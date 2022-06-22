@@ -1,14 +1,15 @@
-/*!
-* Start Bootstrap - Shop Homepage v5.0.5 (https://startbootstrap.com/template/shop-homepage)
-* Copyright 2013-2022 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
-*/
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
-
 function setImage(slug, title, url) {
     const imageModal = document.getElementById('imageModal');
     imageModal.setAttribute('src', `${window.location.origin}/${slug}/image`);
+    imageModal.toggleAttribute('hidden', true);
+
+    const imageModalLoading = document.getElementById('imageModalLoading');
+    imageModalLoading.toggleAttribute('hidden', false);
+
+    imageModal.addEventListener('load', () => {
+        imageModalLoading.toggleAttribute('hidden', true);
+        imageModal.toggleAttribute('hidden', false);
+    });
 
     const titleModal = document.getElementById('titleModal');
     titleModal.textContent = title;
@@ -16,14 +17,21 @@ function setImage(slug, title, url) {
     const hrefModal = document.getElementById('hrefModal');
     hrefModal.setAttribute('href', url);
 
-    if(window.innerHeight >= window.innerWidth){
+    if (window.innerHeight >= window.innerWidth) {
         imageModal.style.maxWidth = `${0.9 * window.innerWidth}px`;
         imageModal.style.Height = 'auto';
     } else {
         imageModal.style.maxHeight = `${0.75 * window.innerHeight}px`;
         imageModal.style.Width = 'auto';
     }
-
-    console.log(`window.innerHeight: ${window.innerHeight}`)
-    console.log(`window.innerWidth: ${window.innerWidth}`)
 }
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const images = document.querySelectorAll('.img-load');
+//     images.forEach(el => {
+//       el.addEventListener('load', () => {
+//           document.getElementById(`${el.id}Loading`).toggleAttribute('hidden', true);
+//           el.toggleAttribute('hidden', false);
+//       });
+//     });
+// });
