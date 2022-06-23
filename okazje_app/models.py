@@ -1,6 +1,6 @@
 from django.core.files.base import ContentFile
 from django.db import models
-from okazje_app.utils import unique_slugify, create_thumbnail
+from okazje_app.utils import unique_slugify, create_image
 
 
 class Item(models.Model):
@@ -29,11 +29,11 @@ class Item(models.Model):
                 import requests
                 res = requests.get(self.image_url, stream=True)
                 if res.status_code == 200:
-                    self.image = ContentFile(res.content, name='image')
-                    self.image_thumbnail = ContentFile(create_thumbnail(self.image), name='thumbnail')
+                    self.image = ContentFile(create_image(res.content, 1280), name='image')
+                    self.image_thumbnail = ContentFile(create_image(self.image, 384), name='thumbnail')
 
         if self.image:
             if not self.image_thumbnail:
-                self.image_thumbnail = ContentFile(create_thumbnail(self.image), name='thumbnail')
+                self.image_thumbnail = ContentFile(create_image(self.image, 384), name='thumbnail')
 
         return super().save(*args, **kwargs)

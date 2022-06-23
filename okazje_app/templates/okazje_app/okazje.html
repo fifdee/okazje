@@ -29,45 +29,44 @@
             <div class="row gx-2 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {% for okazja in okazje %}
                     <div class="col mb-3">
-                        <div class="card h-100 " style="border-color:
-                            {% if okazja.id|divisibleby:2 %}#B5EAEA{% else %}#FFBCBC{% endif %}; border-width: medium">
-                            <!-- Product image-->
-                            <a href="" data-bs-toggle="modal" data-bs-target="#Modal"
+
+                        <a class="text-decoration-none text-black-50" href="" data-bs-toggle="modal" data-bs-target="#Modal"
                                onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">
-                                {#                            <a href="/{{ okazja.slug }}/image">#}
-                                <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
-                                     id="{{ okazja.id }}_image" alt="">
-{#                                <img class="" src="{% static 'assets/loading.svg' %}" alt="" id="{{ okazja.id }}_imageLoading"/>#}
-                            </a>
+                            <div class="card h-100 " style="border-color:
+                                {% if okazja.id|divisibleby:2 %}#B5EAEA{% else %}#FFBCBC{% endif %}; border-width: medium">
 
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h6 class="fw-bolder">{{ okazja.title }}</h6>
+                                    <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
+                                         id="{{ okazja.id }}_image" alt="">
 
-                                    {{ okazja.rating }}
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
+                                <!-- Product details-->
+                                <div class="card-body p-1">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h6 class="fw-bolder">{{ okazja.title }}</h6>
+
+                                        Ocena: {{ okazja.rating }}/5, liczba ocen: {{ okazja.rating_count }}
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+
+                                        <!-- Product price-->
+                                        {{ okazja.price }}
                                     </div>
-
-                                    <!-- Product price-->
-                                    {{ okazja.price }}
                                 </div>
+    {#                            <!-- Product actions-->#}
+    {#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
+    {#                                <div class="text-center">#}
+    {#                                    <a class="btn btn-outline-dark mt-auto" href="#"#}
+    {#                                       data-bs-toggle="modal" data-bs-target="#Modal"#}
+    {#                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>#}
+    {#                                </div>#}
+    {#                            </div>#}
                             </div>
-{#                            <!-- Product actions-->#}
-{#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
-{#                                <div class="text-center">#}
-{#                                    <a class="btn btn-outline-dark mt-auto" href="#"#}
-{#                                       data-bs-toggle="modal" data-bs-target="#Modal"#}
-{#                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>#}
-{#                                </div>#}
-{#                            </div>#}
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
             </div>

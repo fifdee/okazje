@@ -87,10 +87,10 @@ def _slug_strip(value, separator='-'):
     return value
 
 
-def create_thumbnail(input_image):
+def create_image(input_image, size):
     from PIL import Image
-    img_width = 256
-    img_height = 256
+    img_width = size
+    img_height = size
 
     img_white = Image.new('RGB', (img_width, img_height), color=(255, 255, 255))
 
@@ -100,11 +100,11 @@ def create_thumbnail(input_image):
     img_input_ar = img_input_width / img_input_height
 
     if img_input_width > img_input_height:
-        resized = img_input.resize((256, int(256 / img_input_ar)), Image.ANTIALIAS)
-        img_white.paste(resized, (0, int((256 - int(256 / img_input_ar)) * 0.5)))
+        resized = img_input.resize((size, int(size / img_input_ar)), Image.ANTIALIAS)
+        img_white.paste(resized, (0, int((size - int(size / img_input_ar)) * 0.5)))
     else:
-        resized = img_input.resize((int(256 * img_input_ar), 256), Image.ANTIALIAS)
-        img_white.paste(resized, (int((256 - int(256 * img_input_ar)) * 0.5), 0))
+        resized = img_input.resize((int(size * img_input_ar), size), Image.ANTIALIAS)
+        img_white.paste(resized, (int((size - int(size * img_input_ar)) * 0.5), 0))
 
     from io import BytesIO
     output = BytesIO()
