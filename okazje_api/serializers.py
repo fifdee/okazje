@@ -8,7 +8,7 @@ from okazje_app.models import Item
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ['title', 'url', 'image', 'image_url', 'price', 'rating', 'rating_count']
+        fields = ['title', 'url', 'image', 'image_url', 'price', 'rating', 'rating_count', 'description']
 
     def validate_url(self, data):
         items = Item.objects.all()
@@ -17,7 +17,3 @@ class ItemSerializer(serializers.ModelSerializer):
                 raise ValidationError(message='Przedmiot o takim URL już jest w bazie danych.')
 
         return data
-
-
-        # val = re.findall(r"[\d,]+", self.price)[0]
-        # self.price = val.replace(',', '.')
