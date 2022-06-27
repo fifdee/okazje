@@ -6,20 +6,20 @@
 {% block content %}
     <header class="py-0">
         <div
-            class="p-0 text-center bg-image"
-            style="
-              background-image: url({% static 'assets/bg.svg' %});
-              height: 200px;
-            "
-          >
-{#            <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">#}
-{#              <div class="d-flex justify-content-center align-items-center h-100">#}
-{#                <div class="text-white">#}
-{#                  <h1 class="mb-1">Nie przegap okazji :-)</h1>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-          </div>
+                class="p-0 text-center bg-image"
+                style="
+                        background-image: url({% static 'assets/bg.svg' %});
+                        height: 200px;
+                        "
+        >
+            {#            <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">#}
+            {#              <div class="d-flex justify-content-center align-items-center h-100">#}
+            {#                <div class="text-white">#}
+            {#                  <h1 class="mb-1">Nie przegap okazji :-)</h1>#}
+            {#                </div>#}
+            {#              </div>#}
+            {#            </div>#}
+        </div>
     </header>
 
     {% include 'okazje_app/modal.html' %}
@@ -30,13 +30,15 @@
                 {% for okazja in okazje %}
                     <div class="col mb-3">
 
-                        <a class="text-decoration-none text-black-50" href="" data-bs-toggle="modal" data-bs-target="#Modal"
-                               onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">
+                        <a class="text-decoration-none text-black-50" href="" data-bs-toggle="modal"
+                           data-bs-target="#Modal"
+                           onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`,
+                                   `{{ okazja.description }}`,`{{ okazja.url }}`)">
                             <div class="card h-100 " style="border-color:
-                                {% if okazja.id|divisibleby:2 %}#B5EAEA{% else %}#FFBCBC{% endif %}; border-width: medium">
+                                    {% if okazja.id|divisibleby:2 %}#B5EAEA{% else %}#FFBCBC{% endif %}; border-width: medium">
 
-                                    <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
-                                         id="{{ okazja.id }}_image" alt="">
+                                <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
+                                     id="{{ okazja.id }}_image" alt="">
 
                                 <!-- Product details-->
                                 <div class="card-body p-1">
@@ -44,27 +46,46 @@
                                         <!-- Product name-->
                                         <h6 class="fw-bolder">{{ okazja.title }}</h6>
 
-                                        Ocena: {{ okazja.rating }}/5, liczba ocen: {{ okazja.rating_count }}
-                                        <div class="d-flex justify-content-center small text-warning mb-2">
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                        </div>
+                                        {% if okazja.rating and okazja.rating_count %}Ocena: {{ okazja.rating }}/5 -
+                                            liczba ocen: {{ okazja.rating_count }}{% endif %}
+
+                                        {% if okazja.rating %}
+                                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                                <div class="bi-star{% if okazja.rating >= 0.75 %}-fill
+                                                    {% elif okazja.rating >= 0.25 and okazja.rating < 0.75 %}-half
+                                                    {% elif okazja.rating < 0.25 %}{% endif %}">
+                                                </div>
+                                                <div class="bi-star{% if okazja.rating >= 1.75 %}-fill
+                                                    {% elif okazja.rating >= 1.25 and okazja.rating < 1.75 %}-half
+                                                    {% elif okazja.rating < 1.25 %}{% endif %}">
+                                                </div>
+                                                <div class="bi-star{% if okazja.rating >= 2.75 %}-fill
+                                                    {% elif okazja.rating >= 2.25 and okazja.rating < 2.75 %}-half
+                                                    {% elif okazja.rating < 2.25 %}{% endif %}">
+                                                </div>
+                                                <div class="bi-star{% if okazja.rating >= 3.75 %}-fill
+                                                    {% elif okazja.rating >= 3.25 and okazja.rating < 3.75 %}-half
+                                                    {% elif okazja.rating < 3.25 %}{% endif %}">
+                                                </div>
+                                                <div class="bi-star{% if okazja.rating >= 4.75 %}-fill
+                                                    {% elif okazja.rating >= 4.25 and okazja.rating < 4.75 %}-half
+                                                    {% elif okazja.rating < 4.25 %}{% endif %}">
+                                                </div>
+                                            </div>
+                                        {% endif %}
 
                                         <!-- Product price-->
                                         {{ okazja.price }}
                                     </div>
                                 </div>
-    {#                            <!-- Product actions-->#}
-    {#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
-    {#                                <div class="text-center">#}
-    {#                                    <a class="btn btn-outline-dark mt-auto" href="#"#}
-    {#                                       data-bs-toggle="modal" data-bs-target="#Modal"#}
-    {#                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>#}
-    {#                                </div>#}
-    {#                            </div>#}
+                                {#                            <!-- Product actions-->#}
+                                {#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
+                                {#                                <div class="text-center">#}
+                                {#                                    <a class="btn btn-outline-dark mt-auto" href="#"#}
+                                {#                                       data-bs-toggle="modal" data-bs-target="#Modal"#}
+                                {#                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>#}
+                                {#                                </div>#}
+                                {#                            </div>#}
                             </div>
                         </a>
                     </div>

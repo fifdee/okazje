@@ -1,4 +1,4 @@
-function setImage(slug, title, url) {
+function setImage(slug, title, description, url) {
     const imageModal = document.getElementById('imageModal');
     imageModal.setAttribute('src', `${window.location.origin}/${slug}/image`);
     imageModal.toggleAttribute('hidden', true);
@@ -13,6 +13,9 @@ function setImage(slug, title, url) {
 
     const titleModal = document.getElementById('titleModal');
     titleModal.textContent = title;
+
+    const descriptionModal = document.getElementById('descriptionModal');
+    descriptionModal.textContent = description;
 
     const hrefModal = document.getElementById('hrefModal');
     hrefModal.setAttribute('href', url);

@@ -108,14 +108,14 @@ def create_image(input_image, size):
 
     from io import BytesIO
     output = BytesIO()
-    img_white.save(output, 'webp')
+    img_white.save(output, 'webp', quality=90)
     contents = output.getvalue()
     output.close()
 
     return contents
 
 
-def create_image(text):
+def create_image_from_text(text):
     from PIL import Image, ImageDraw, ImageFont
     from string import ascii_letters
 

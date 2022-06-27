@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
+import re
 
 from okazje_app.models import Item
 
@@ -16,3 +17,7 @@ class ItemSerializer(serializers.ModelSerializer):
                 raise ValidationError(message='Przedmiot o takim URL już jest w bazie danych.')
 
         return data
+
+
+        # val = re.findall(r"[\d,]+", self.price)[0]
+        # self.price = val.replace(',', '.')

@@ -8,12 +8,13 @@ class Item(models.Model):
     image = models.ImageField(null=True, blank=True)
     image_thumbnail = models.ImageField(null=True, blank=True)
     image_url = models.URLField(null=True, blank=True)
-    price = models.CharField(max_length=100)
+    price = models.FloatField(null=True, blank=True)
     url = models.URLField()
     description = models.TextField(null=True, blank=True)
-    rating = models.CharField(max_length=256, null=True, blank=True)
+    rating = models.FloatField(null=True, blank=True)
     rating_count = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=False, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
@@ -29,7 +30,7 @@ class Item(models.Model):
                 import requests
                 res = requests.get(self.image_url, stream=True)
                 if res.status_code == 200:
-                    self.image = ContentFile(create_image(res.content, 1280), name='image')
+                    self.image = ContentFile(create_image(ContentFile(res.content), 1280), name='image')
                     self.image_thumbnail = ContentFile(create_image(self.image, 384), name='thumbnail')
 
         if self.image:
