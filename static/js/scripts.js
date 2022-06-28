@@ -15,7 +15,7 @@ function setImage(slug, title, description, url) {
     titleModal.textContent = title;
 
     const descriptionModal = document.getElementById('descriptionModal');
-    descriptionModal.textContent = description;
+    descriptionModal.innerHTML = description;
 
     const hrefModal = document.getElementById('hrefModal');
     hrefModal.setAttribute('href', url);
