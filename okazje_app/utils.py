@@ -92,7 +92,7 @@ def create_image(input_image, size):
     img_width = size
     img_height = size
 
-    img_white = Image.new('RGB', (img_width, img_height), color=(255, 255, 255))
+    img_white = Image.new('RGB', (img_width, img_height), color=(255, 255, 255, 0))
 
     img_input = Image.open(input_image)
     img_input_width = img_input.size[0]

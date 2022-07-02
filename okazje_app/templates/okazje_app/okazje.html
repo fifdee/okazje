@@ -5,21 +5,16 @@
 
 {% block content %}
     <header class="py-0">
-        <div
-                class="p-0 text-center bg-image"
-                style="
-                        background-image: url({% static 'assets/bg.svg' %});
-                        height: 200px;
-                        "
-        >
-            {#            <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">#}
-            {#              <div class="d-flex justify-content-center align-items-center h-100">#}
-            {#                <div class="text-white">#}
-            {#                  <h1 class="mb-1">Nie przegap okazji :-)</h1>#}
-            {#                </div>#}
-            {#              </div>#}
-            {#            </div>#}
+        <div class="p-0 text-center">
+            <div class="col1_bg">
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="text-white">
+                  <h1 class="p-2">Pokochasz.to</h1>
+                </div>
+              </div>
+            </div>
         </div>
+
     </header>
 
     {% include 'okazje_app/modal.html' %}
@@ -35,8 +30,8 @@
                            onclick="setModalProperties(`{{ okazja.slug }}`, `{{ okazja.title }}`,
                                    `{{ okazja.description }}`,`{{ okazja.url }}`, `{{ okazja.price }}`,
                                    `{{ okazja.rating }}`, `{{ okazja.rating_count }}`)">
-                            <div class="card h-100 " style="border-color:
-                                    {% if okazja.id|divisibleby:2 %}#B5EAEA{% else %}#FFBCBC{% endif %}; border-width: medium">
+                            <div class="card h-100 {% if okazja.id|divisibleby:2 %}col2_border
+                                {% else %}col1_border{% endif %} col4_bg" style="border-width: medium">
 
                                 <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
                                      id="{{ okazja.id }}_image" alt="">
@@ -45,11 +40,8 @@
                                     <div class="text-center">
                                         <h6 class="fw-bolder">{{ okazja.title }}</h6>
 
-{#                                        {% if okazja.rating and okazja.rating_count %}Ocena: {{ okazja.rating }}/5 -#}
-{#                                            liczba ocen: {{ okazja.rating_count }}{% endif %}#}
-
                                         {% if okazja.rating %}
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="d-flex justify-content-center small text-warning">
                                                 <div class="bi-star{% if okazja.rating >= 0.75 %}-fill
                                                     {% elif okazja.rating >= 0.25 and okazja.rating < 0.75 %}-half
                                                     {% elif okazja.rating < 0.25 %}{% endif %}">
@@ -72,7 +64,8 @@
                                                 </div>
 
                                                 <div>
-                                                    &nbsp({% if okazja.rating and okazja.rating_count %}{{ okazja.rating }}{% endif %})
+                                                    {% if okazja.rating and okazja.rating_count %}
+                                                        &nbsp({{ okazja.rating }}){% endif %}
                                                 </div>
                                             </div>
                                         {% endif %}
@@ -97,8 +90,8 @@
         </div>
     </section>
 
-    <footer class="py-5" style="background-color: #FFBCBC">
-        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+    <footer class="py-5 col2_bg" style="background-color: #FFBCBC">
+        <div class="container"><p class="m-0 text-center text-on-col2">Copyright &copy; Your Website 2022</p></div>
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
