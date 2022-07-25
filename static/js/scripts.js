@@ -1,6 +1,6 @@
-let col1 = '#B5EAEA';
-let col2 = '#FFBCBC';
-let col3 = '#EDF6E5';
+let col1 = '#ff5e5e';
+let col2 = '#fab825';
+let col3 = '#FFFFFF';
 let col4 = '#FFFFFF'; // site bg
 
 function invertColor(hex, bw) {

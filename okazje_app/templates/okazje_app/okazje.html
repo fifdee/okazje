@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Pokochasz.to - strona główna{% endblock %}
+{% block title %}ulubi.one - strona główna{% endblock %}
 
 {% block content %}
     <header class="py-0">
         <div class="p-0 text-center">
-            <div class="col1_bg">
+            <div>
               <div class="d-flex justify-content-center align-items-center">
-                <div class="text-white">
-                  <h1 class="p-2">Pokochasz.to</h1>
-                </div>
+                <img src="{% static 'assets/logo.png' %}" alt="logo" height="100px">
               </div>
             </div>
         </div>
@@ -31,9 +29,9 @@
                                    `{{ okazja.description }}`,`{{ okazja.url }}`, `{{ okazja.price }}`,
                                    `{{ okazja.rating }}`, `{{ okazja.rating_count }}`)">
                             <div class="card h-100 {% if okazja.id|divisibleby:2 %}col2_border
-                                {% else %}col1_border{% endif %} col4_bg" style="border-width: medium">
+                                {% else %}col1_border{% endif %} col4_bg" style="border-width: medium; border-radius: 30px">
 
-                                <img class="card-img-top img-load" src="/{{ okazja.slug }}/thumbnail"
+                                <img class="card-img-top img-load" style="width: 85%; margin-top: 10px; align-self: center" src="/{{ okazja.slug }}/thumbnail"
                                      id="{{ okazja.id }}_image" alt="">
 
                                 <div class="card-body p-1">
@@ -74,14 +72,6 @@
                                         {{ okazja.price|floatformat:2 }} zł
                                     </div>
                                 </div>
-                                {#                            <!-- Product actions-->#}
-                                {#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
-                                {#                                <div class="text-center">#}
-                                {#                                    <a class="btn btn-outline-dark mt-auto" href="#"#}
-                                {#                                       data-bs-toggle="modal" data-bs-target="#Modal"#}
-                                {#                                       onclick="setImage(`{{ okazja.slug }}`, `{{ okazja.title }}`, `{{ okazja.url }}`)">Szczegóły</a>#}
-                                {#                                </div>#}
-                                {#                            </div>#}
                             </div>
                         </a>
                     </div>
@@ -91,7 +81,7 @@
     </section>
 
     <footer class="py-5 col2_bg" style="background-color: #FFBCBC">
-        <div class="container"><p class="m-0 text-center text-on-col2">Copyright &copy; Your Website 2022</p></div>
+        <div class="container"><p class="m-0 text-center text-on-col2">Copyright &copy; ulubi.one 2022</p></div>
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
