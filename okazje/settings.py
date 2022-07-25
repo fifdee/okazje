@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ['ulubi.one']
+ALLOWED_HOSTS = []
 
 if os.environ.get('PRODUCTION'):
     DEBUG = False
-    ALLOWED_HOSTS.append('.okazje.vip')
+    ALLOWED_HOSTS.append('.ulubi.one')
 else:
     DEBUG = True
 
