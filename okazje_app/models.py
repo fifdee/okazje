@@ -38,3 +38,11 @@ class Item(models.Model):
                 self.image_thumbnail = ContentFile(create_image(self.image, 384), name='thumbnail')
 
         return super().save(*args, **kwargs)
+
+
+class GoToData(models.Model):
+    auction_identifier = models.CharField(max_length=200)
+    redirection_link = models.URLField()
+
+    def __str__(self):
+        return self.auction_identifier + ' -> ' + self.redirection_link

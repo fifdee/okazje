@@ -60,7 +60,11 @@ function setModalProperties(slug, title, description, url, price, rating, rating
     stars = stars.concat(`&nbsp(${rating})</div>`);
 
     const titleModal = document.getElementById('titleModal');
-    titleModal.innerHTML = `${title}<br>${stars}`;
+    if (!isNaN(rating)) {
+        titleModal.innerHTML = `${title}<br>${stars}`;
+    } else {
+        titleModal.innerHTML = `${title}`;
+    }
 
     const descriptionModal = document.getElementById('descriptionModal');
     descriptionModal.innerHTML = description;

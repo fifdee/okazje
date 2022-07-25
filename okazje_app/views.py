@@ -1,8 +1,8 @@
 from django.views import View
 
-from okazje_app.models import Item
+from okazje_app.models import Item, GoToData
 from django.views.generic import ListView
-from django.shortcuts import HttpResponse, get_object_or_404
+from django.shortcuts import HttpResponse, get_object_or_404, redirect
 
 PAGINATE_NUMBER = 12
 
@@ -31,3 +31,9 @@ class ShowThumbnail(View):
         image = item.image_thumbnail
 
         return HttpResponse(image, content_type='image/webp')
+
+
+class GoTo(View):
+    def get(self, request, str, *args, **kwargs):
+        obj = get_object_or_404(klass=GoToData, auction_identifier=str)
+        return redirect(obj.redirection_link)
