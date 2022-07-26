@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from okazje_app.models import Item, GoToData
+from okazje_app.models import Item
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -9,4 +9,3 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Item, ItemAdmin)
-admin.site.register(GoToData)

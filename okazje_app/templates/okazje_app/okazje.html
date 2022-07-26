@@ -7,9 +7,9 @@
     <header class="py-0">
         <div class="p-0 text-center">
             <div>
-              <div class="d-flex justify-content-center align-items-center">
-                <img src="{% static 'assets/logo.png' %}" alt="logo" height="100px">
-              </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{% static 'assets/logo.png' %}" alt="logo" height="100px">
+                </div>
             </div>
         </div>
 
@@ -23,15 +23,20 @@
                 {% for okazja in okazje %}
                     <div class="col mb-3">
 
-                        <a class="text-decoration-none text-black-50" href="" data-bs-toggle="modal"
+
+                        <a class="text-decoration-none text-black-50" {% if details_active %} href="" data-bs-toggle="modal"
                            data-bs-target="#Modal"
                            onclick="setModalProperties(`{{ okazja.slug }}`, `{{ okazja.title }}`,
-                                   `{{ okazja.description }}`,`{{ okazja.url }}`, `{{ okazja.price }}`,
-                                   `{{ okazja.rating }}`, `{{ okazja.rating_count }}`)">
+                                   `{{ okazja.description }}`,`{% url 'goTo' okazja.slug %}`, `{{ okazja.price }}`,
+                                   `{{ okazja.rating }}`, `{{ okazja.rating_count }}`)" {% else %}href=
+                            {% url 'goTo' okazja.slug %}{% endif %}>
                             <div class="card h-100 {% if okazja.id|divisibleby:2 %}col2_border
-                                {% else %}col1_border{% endif %} col4_bg" style="border-width: medium; border-radius: 30px">
+                                {% else %}col1_border{% endif %} col4_bg"
+                                 style="border-width: medium; border-radius: 30px">
 
-                                <img class="card-img-top img-load" style="width: 85%; margin-top: 10px; align-self: center" src="/{{ okazja.slug }}/thumbnail"
+                                <img class="card-img-top img-load"
+                                     style="width: 85%; margin-top: 10px; align-self: center"
+                                     src="/{{ okazja.slug }}/thumbnail"
                                      id="{{ okazja.id }}_image" alt="">
 
                                 <div class="card-body p-1">

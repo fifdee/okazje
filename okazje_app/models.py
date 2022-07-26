@@ -13,11 +13,12 @@ class Item(models.Model):
     description = models.TextField(null=True, blank=True)
     rating = models.FloatField(null=True, blank=True)
     rating_count = models.IntegerField(null=True, blank=True)
-    slug = models.SlugField(null=False, unique=True)
+    slug = models.SlugField(null=False, blank=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
+    clicks = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        return 'Clicks: ' + str(self.clicks) + ' -> ' + self.title
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -38,11 +39,3 @@ class Item(models.Model):
                 self.image_thumbnail = ContentFile(create_image(self.image, 384), name='thumbnail')
 
         return super().save(*args, **kwargs)
-
-
-class GoToData(models.Model):
-    auction_identifier = models.CharField(max_length=200)
-    redirection_link = models.URLField()
-
-    def __str__(self):
-        return self.auction_identifier + ' -> ' + self.redirection_link

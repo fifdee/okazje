@@ -23,11 +23,3 @@ class ItemSerializer(serializers.ModelSerializer):
                                                           'description': validated_data.get('description', None),
                                                       })
         return item
-
-    # def validate_url(self, data):
-    #     items = Item.objects.all()
-    #     for item in items:
-    #         if item.url == data:
-    #             raise ValidationError(message='Przedmiot o takim URL już jest w bazie danych.')
-    #
-    #     return data

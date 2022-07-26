@@ -1,6 +1,6 @@
 from django.views import View
 
-from okazje_app.models import Item, GoToData
+from okazje_app.models import Item
 from django.views.generic import ListView
 from django.shortcuts import HttpResponse, get_object_or_404, redirect
 
@@ -13,6 +13,19 @@ class Items(ListView):
     template_name = 'okazje_app/okazje.html'
     context_object_name = 'okazje'
     paginate_by = PAGINATE_NUMBER
+
+
+class ItemsDirect(ListView):
+    model = Item
+    template_name = 'okazje_app/okazje.html'
+    context_object_name = 'okazje'
+    paginate_by = PAGINATE_NUMBER
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemsDirect, self).get_context_data(**kwargs)
+        context['details_active'] = True
+
+        return context
 
 
 class ShowImage(View):
@@ -34,6 +47,9 @@ class ShowThumbnail(View):
 
 
 class GoTo(View):
-    def get(self, request, str, *args, **kwargs):
-        obj = get_object_or_404(klass=GoToData, auction_identifier=str)
-        return redirect(obj.redirection_link)
+    def get(self, request, slug, *args, **kwargs):
+        obj = get_object_or_404(klass=Item, slug=slug)
+        obj.clicks += 1
+        obj.save()
+
+        return redirect(obj.url)
